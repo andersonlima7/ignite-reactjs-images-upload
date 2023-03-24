@@ -15,7 +15,7 @@ interface CardsProps {
   cards: Card[];
 }
 
-export function CardList({ cards }: CardsProps) {
+export function CardList({ cards }: CardsProps): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedUrl, setSelectedUrl] = useState('');
 

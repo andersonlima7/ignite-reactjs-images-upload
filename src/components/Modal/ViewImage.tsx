@@ -19,7 +19,7 @@ export function ModalViewImage({
   isOpen,
   onClose,
   imgUrl,
-}: ModalViewImageProps) {
+}: ModalViewImageProps): JSX.Element {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -30,7 +30,7 @@ export function ModalViewImage({
 
         <ModalFooter>
           <Flex justifyContent="left" w="100%">
-            <Link href={imgUrl} target="_blank">
+            <Link href={imgUrl} isExternal>
               Abrir original
             </Link>
           </Flex>

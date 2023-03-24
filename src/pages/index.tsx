@@ -8,14 +8,12 @@ import { api } from '../services/api';
 import { Loading } from '../components/Loading';
 import { Error } from '../components/Error';
 
-type pageParameter = {
-  pageParam: string;
-};
-
-export default function Home() {
-  const getImages = async ({ pageParam = 0 }) => {
+export default function Home(): JSX.Element {
+  const getImages = async ({ pageParam = null }) => {
     //FIXME: Change to null?
-    const response = await api.get(`/api/images?after=${pageParam}`);
+    const response = await api.get('/api/images', {
+      params: { after: pageParam },
+    });
     return response.data;
   };
 
@@ -33,7 +31,7 @@ export default function Home() {
   const formattedData = useMemo(() => {
     const newData = data?.pages.map(page => page.data).flat();
 
-    console.log(JSON.stringify(newData, null, 2));
+    // console.log(JSON.stringify(newData, null, 2));
 
     return newData;
   }, [data]);
@@ -48,7 +46,6 @@ export default function Home() {
 
       <Box maxW={1120} px={20} mx="auto" my={20}>
         <CardList cards={formattedData} />
-
         {hasNextPage && (
           <Button mt={5} onClick={() => fetchNextPage()}>
             {isFetchingNextPage ? 'Carregando...' : 'Carregar mais'}
